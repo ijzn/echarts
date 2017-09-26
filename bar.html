@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 引入echarts文件 -->
+    <script src="./lib/echarts.js"></script>
+    <title>柱状图</title>
+</head>
+<body>
+    <a target="_blank" href="http://echarts.baidu.com/index.html">详情请见echarts3文档</a>
+    <!-- 为echarts准备一个容器 -->
+    <div id="box" style="height:600px;width:900px;margin:30px auto;background:#333;"></div>
+    <script>
+        var mychart = echarts.init(document.getElementById('box'))
+    
+        var option = {
+            /* 标题 */
+            title:{
+                text:'ECharts 入门示例'
+            },
+            /* 工具箱 */
+            toolbox:{
+                show:true,
+                feature:{
+                    saveAsImage:{
+                        show:true
+                    }
+                }
+            },
+            /* 图例 */
+            legend:{
+                data:['销量','产量']
+            },
+            /* X轴 */
+            xAxis:{
+                data:["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            /* Y轴 */
+            yAxis:{},
+            /* 数据 */
+            series:[
+                {
+                    name:'销量',
+                    type:'bar',
+                    data:[20,13,10,26,12,68,]
+                },
+                {
+                    name:'产量',
+                    type:'bar',
+                    data:[10,15,20,36,2,78,]
+                }
+            ]
+        };
+
+        /* 使用刚指定的配置项和数据显示图表 */
+        mychart.setOption(option)
+    </script>
+</body>
+</html>
