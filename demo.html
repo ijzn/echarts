@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 引入echarts文件 -->
+    <script src="http://echarts.baidu.com/dist/echarts.js"></script>
+    <title>折线图</title>
+</head>
+
+<body>
+    <button id="markPoint">突破</button>
+    <button id="markPoint1">评级</button>
+    <a target="_blank" href="http://echarts.baidu.com/index.html">详情请见echarts3文档</a>
+    <!-- 为echarts准备一个容器 -->
+    <div id="box" style="height:300px;width:100%;margin:30px auto;background:#333;"></div>
+    <script>
+        let year = '2017'
+        var mychart = echarts.init(document.getElementById('box'))
+
+        var option = {
+            /* 标题 */
+            title: {
+                text: '近一个月实时走势',
+                left: 'center',
+                bottom: '10px'
+            },
+            /* 工具箱 */
+            toolbox: {
+                show: true,
+                feature: {
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            /* 图例 */
+            legend: {
+                data: ['资产价值', '债权增长', '资金成本']
+            },
+            /* 提示框 */
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    label: {
+                        formatter: year + '-{value}'
+                    }
+                }
+            },
+            /* X轴 */
+            xAxis: {
+                data: ["5-1", "5-7", "5-14", "5-21", "5-28", "2-30"]
+            },
+            /* Y轴 */
+            yAxis: {
+                axisLine: {
+                    show: false
+                }
+            },
+            /* 数据 */
+            series: [{
+                    name: '资产价值',
+                    type: 'line',
+                    data: [20, 13, 10, 26, 12, 68, ],
+                    markPoint: undefined,
+                    /* {
+                        show:false,
+                        label:{
+                            normal:{
+                                show:false
+                            }
+                        },
+                        data: [{
+                            type: 'max',
+                            name: '最大值',
+                        }, {
+                            type: 'min',
+                            name: '最小值',
+                        }]
+                    } */
+                },
+                {
+                    name: '债权增长',
+                    type: 'line',
+                    data: [10, 15, 20, 36, 2, 78, ]
+                },
+                {
+                    name: '资金成本',
+                    type: 'line',
+                    data: [10, 25, 32, 15, 12, 48, ]
+                }
+            ]
+        };
+
+        /* 使用刚指定的配置项和数据显示图表 */
+        mychart.setOption(option)
+        //突破：箭头 向上  绿色
+        let markPoint = document.getElementById('markPoint');
+        markPoint.addEventListener('click', function () {
+            option.series[0].markPoint = {
+                symbol:'arrow',
+                symbolSize:10,
+                symbolRotate:180,
+                itemStyle:{
+                    normal:{
+                        color:'green'
+                    }
+                },
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [{
+                    type: 'max',
+                    name: '最大值',
+                }]
+            }
+            mychart.setOption(option)
+        })
+
+        //评级：箭头 向下  橘色
+        let markPoint1 = document.getElementById('markPoint1');
+        markPoint1.addEventListener('click', function () {
+            option.series[0].markPoint = {
+                symbol:'arrow',
+                symbolSize:10,
+                symbolRotate:0,
+                itemStyle:{
+                    normal:{
+                        color:"orange"
+                    }
+                },
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [{
+                    type: 'min',
+                    name: '最小值',
+                }]
+            }
+            mychart.setOption(option)
+        })        
+    </script>
+</body>
+
+</html>
